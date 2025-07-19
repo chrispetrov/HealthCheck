@@ -17,7 +17,12 @@ interface WeatherForecast {
 export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    http.get<WeatherForecast[]>('/api/weatherforecast').subscribe(result => {
+      this.forecasts = result;
+    }, error =>
+      console.error(error));
+  }
 
   ngOnInit() {
     this.getForecasts();
