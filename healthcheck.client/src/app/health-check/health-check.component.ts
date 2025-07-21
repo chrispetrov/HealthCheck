@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment'
   selector: 'app-health-check',
   standalone: false,
   templateUrl: './health-check.component.html',
-  styleUrl: './health-check.component.css'
+  styleUrl: './health-check.component.scss'
 })
 export class HealthCheckComponent implements OnInit {
   public result?: Result;
