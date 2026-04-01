@@ -1,0 +1,16 @@
+# Build folders
+bin/
+obj/
+dist/
+node_modules/
+
+# Local settings
+.vs/
+.vscode/
+launchSettings.json
+appsettings.Development.json
+
+# User settings
+*.user
+*.userosscache
+*.suo
