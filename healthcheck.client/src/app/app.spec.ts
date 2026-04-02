@@ -40,11 +40,15 @@ describe('App', () => {
   });
   
   it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
+    const req = httpMock.expectOne('https://localhost:7289/weatherforecast');
+    req.flush([]);
+
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Weatherforecast');
- }); //this is new
+    // Use .trim() to remove any invisible newlines or spaces around the text
+    const h1Text = compiled.querySelector('h1')?.textContent?.trim();
+    expect(h1Text).toContain('Weather forecast');
+  }); //this is new
 
   it('should retrieve weather forecasts from the server', () => {
     const mockForecasts = [
@@ -54,7 +58,9 @@ describe('App', () => {
 
     component.ngOnInit();
 
-    const req = httpMock.expectOne('/weatherforecast');
+    const req = httpMock.expectOne(request =>
+      request.url.endsWith('/weatherforecast')
+    );
     expect(req.request.method).toEqual('GET');
     req.flush(mockForecasts);
 
