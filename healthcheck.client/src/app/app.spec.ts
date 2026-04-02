@@ -1,5 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { App } from './app';
 
 describe('App', () => {
@@ -28,6 +29,14 @@ describe('App', () => {
     expect(component).toBeTruthy();
   });
 
+  
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Weatherforecast');
+ }); //this is new
+
   it('should retrieve weather forecasts from the server', () => {
     const mockForecasts = [
       { date: '2021-10-01', temperatureC: 20, temperatureF: 68, summary: 'Mild' },
@@ -40,6 +49,6 @@ describe('App', () => {
     expect(req.request.method).toEqual('GET');
     req.flush(mockForecasts);
 
-    expect(component.forecasts).toEqual(mockForecasts);
+    expect(component.forecasts()).toEqual(mockForecasts);
   });
-};
+} );

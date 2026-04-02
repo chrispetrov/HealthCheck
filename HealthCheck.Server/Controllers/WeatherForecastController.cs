@@ -4,7 +4,7 @@ namespace HealthCheck.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController(ILogger<WeatherForecastController> logger) : ControllerBase //added the ILogger ingector
     {
         private static readonly string[] Summaries =
         [
@@ -14,6 +14,7 @@ namespace HealthCheck.Server.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            logger.LogInformation("Weather data was requested");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
