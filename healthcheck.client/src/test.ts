@@ -11,7 +11,3 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting(),
 );
 
-// This tells Karma to find all files ending in .spec.ts
-// @ts-ignore
-const context = require.context('./', true, /\.spec\.ts$/);
-context.keys().forEach(context);

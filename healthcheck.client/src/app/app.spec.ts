@@ -29,6 +29,15 @@ describe('App', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('Smoke Test', () => {
+    it('should verify that math still works', () => {
+      expect(1 + 1).toBe(2);
+    });
+
+    it('should verify that true is true', () => {
+      expect(true).toBe(true);
+    });
+  });
   
   it('should render title', () => {
     const fixture = TestBed.createComponent(App);
