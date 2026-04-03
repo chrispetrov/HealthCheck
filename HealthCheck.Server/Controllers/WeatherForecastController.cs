@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HealthCheck.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]  //added api/
     public class WeatherForecastController(ILogger<WeatherForecastController> logger) : ControllerBase //added the ILogger ingector
     {
         private static readonly string[] Summaries =

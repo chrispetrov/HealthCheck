@@ -1,7 +1,7 @@
 const PROXY_CONFIG = [
   {
     context: [
-      "/weatherforecast"
+      "/api/"  //from weatherforecast
     ],
     // Hardcoding the IP ensures we skip DNS/IPv6 confusion
     target: "https://127.0.0.1:7289",

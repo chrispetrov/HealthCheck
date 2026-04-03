@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 // 1. Added OnInit to the core imports
 import { Component, signal, OnInit } from '@angular/core';
+import { retry, delay } from 'rxjs';
 
 // 2. This interface tells TypeScript what the Backend data looks like
 interface WeatherForecast {
@@ -26,7 +27,7 @@ export class App implements OnInit {
   }
 
   getForecasts() {
-    this.http.get<WeatherForecast[]>('https://localhost:7289/weatherforecast').subscribe({
+    this.http.get<WeatherForecast[]>('/api/weatherforecast').pipe(retry({ count: 3, delay: 1000})).subscribe({ //added /api/
       next: (result) => {
         // 2. Update the signal using .set()
         this.forecasts.set(result);

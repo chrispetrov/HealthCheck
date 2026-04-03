@@ -41,7 +41,7 @@ describe('App', () => {
   
   it('should render title', () => {
     fixture.detectChanges();
-    const req = httpMock.expectOne('https://localhost:7289/weatherforecast');
+    const req = httpMock.expectOne('/api/weatherforecast'); //changed frohttps://localhost:7289/weatherforecast
     req.flush([]);
 
     const compiled = fixture.nativeElement as HTMLElement;
