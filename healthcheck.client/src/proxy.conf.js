@@ -14,5 +14,5 @@ const PROXY_CONFIG = [
     }
   }
 ];
-
+// added a new targer
 module.exports = PROXY_CONFIG;

@@ -36,6 +36,6 @@ export class App implements OnInit {
       error: (err) => console.error(err)
     });
   }
-
+  // improved logic
   protected readonly title = signal('healthcheck.client');
 }
