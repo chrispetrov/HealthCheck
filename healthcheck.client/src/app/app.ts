@@ -1,15 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-// 1. Added OnInit to the core imports
-import { Component, signal, OnInit } from '@angular/core';
-import { retry, delay } from 'rxjs';
-
-// 2. This interface tells TypeScript what the Backend data looks like
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { NavMenu } from './nav-menu/nav-menu'; // or './nav-menu/nav-menu.component'
 
 @Component({
   selector: 'app-root',
@@ -17,25 +8,6 @@ interface WeatherForecast {
   standalone: false,
   styleUrl: './app.css'
 })
-export class App implements OnInit {
-  public forecasts = signal<WeatherForecast[]>([]);
-
-  constructor(private http: HttpClient) { }
-
-  ngOnInit() {
-    this.getForecasts();
-  }
-
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/api/weatherforecast').pipe(retry({ count: 3, delay: 1000})).subscribe({ //added /api/
-      next: (result) => {
-        // 2. Update the signal using .set()
-        this.forecasts.set(result);
-        console.log("Data is now in the signal:", this.forecasts());
-      },
-      error: (err) => console.error(err)
-    });
-  }
-  // improved logic
-  protected readonly title = signal('healthcheck.client');
+export class AppComponent {
+  title = 'HealthCheck';
 }

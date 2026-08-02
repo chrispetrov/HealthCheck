@@ -3,8 +3,8 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
-  standalone: false,
   templateUrl: './nav-menu.html',
+  standalone: false,
   styleUrl: './nav-menu.css',
 })
 export class NavMenu {}
