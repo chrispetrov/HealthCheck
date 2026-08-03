@@ -6,6 +6,7 @@ builder.Services.AddCors(options => {
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddHealthChecks();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -24,8 +25,12 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseCors("AllowAll");
+
+app.UseHealthChecks(new PathString("/api/health")); //added before MapContorllers
+
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
+
 
 app.Run();
