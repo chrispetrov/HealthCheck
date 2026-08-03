@@ -1,3 +1,5 @@
+global using HealthCheck.Server;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options => {
@@ -6,7 +8,8 @@ builder.Services.AddCors(options => {
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddCheck("ICMP", new ICMPHealthCheck("www.google.com",1000));
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
