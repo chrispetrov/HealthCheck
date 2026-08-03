@@ -9,7 +9,11 @@ builder.Services.AddCors(options => {
 
 builder.Services.AddControllers();
 builder.Services.AddHealthChecks()
-    .AddCheck("ICMP", new ICMPHealthCheck("www.google.com",1000));
+    .AddCheck("ICMP", new ICMPHealthCheck("www.google.com",1000))
+    .AddCheck("ICMP_02",new ICMPHealthCheck("www.google.com", 100))
+    .AddCheck("ICMP_03",new ICMPHealthCheck($"www.{Guid.NewGuid():N}.com", 100));
+
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -29,7 +33,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseCors("AllowAll");
 
-app.UseHealthChecks(new PathString("/api/health")); //added before MapContorllers
+app.UseHealthChecks(new PathString("/api/health"), new CustomHealthCheckOptions()); //added before MapContorllers
 
 app.MapControllers();
 
